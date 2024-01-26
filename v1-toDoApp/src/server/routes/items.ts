@@ -19,6 +19,18 @@ res.send('create a todo item')
 router.get('/:id', (_req: Request, res: Response) => {
 _req.params.id
 res.send(`get an individual item ${_req.params.id}`)
-  })
+})
+
+//update an individual item
+router.put('/:id', (_req: Request, res: Response) => {
+  _req.params.id
+  res.send(`update an individual item ${_req.params.id}`)
+})
+
+//Delete an individual item
+router.delete('/:id', (_req: Request, res: Response) => {
+  _req.params.id
+  res.send(`delete an individual item ${_req.params.id}`)
+})
 
 export default router;
