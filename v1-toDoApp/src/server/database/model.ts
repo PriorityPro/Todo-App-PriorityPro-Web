@@ -12,7 +12,8 @@ export { pool, PG_URI };
 
 export const query = (
   text: string,
-  params: string[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: string[] | undefined | any
 ): Promise<QueryResult> => {
   console.log('executed query', text);
   return new Promise<QueryResult>((resolve, reject) => {

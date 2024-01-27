@@ -1,11 +1,12 @@
 // import { sql } from "@vercel/postgres";
 import { query } from "../database/model.ts";
+import createHttpError from 'http-errors';
 import { Request, Response, NextFunction } from "express";
 
 
 interface itemsControllerInterface {
   createItem: (req: Request, res: Response, next: NextFunction) => Promise<void>,
-
+  fetchItems: (req: Request, res: Response, next: NextFunction) => Promise<void>,
 }
 
 const itemController : itemsControllerInterface = {
@@ -43,6 +44,25 @@ try {
   res.status(500).send('Error creating a new item to database')
   next()
       }
+   },
+
+   //create our fetchitems controller
+   //res.locals.items
+   fetchItems: async (_req: Request, res: Response, next: NextFunction) => {
+    //const { title, completed } = req.body;
+    const sqlCommand = `SELECT * FROM toDoItems;`;
+    try {
+      const allItems = await query(sqlCommand);
+      res.locals.fetchedItems = allItems.rows;
+      if (!allItems.rowCount) throw createHttpError(400, 'Item not found')
+      return next();
+  
+    } catch (err) {
+      console.error('Failed to fetch all items in the todo list', err);
+      return next(createHttpError(400, 'Could not retreive your todo list request'))
+    }
+
+
    }
 }
 

@@ -7,20 +7,18 @@ const router = express.Router();
 
 //get the items for our todo list
 //router.get("/items") === router.get("/")
-router.get("/", (_req: Request, res: Response) => {
-  res.send("sending the todo list items")
+router.get("/", itemController.fetchItems, (_req: Request, res: Response) => {
+  res.status(200).json(res.locals.fetchedItems);
   
 })
 
 //post to create our items for a todo list
 router.post('/create', itemController.createItem, (_req: Request, res: Response) => {
 //res.status(200).send('test creating an item');
-res.status(200).json(res.locals.items)
+res.status(200).json(res.locals.item)
 })
 
-// router.post('/', (_req: Request, res: Response) => {
-//   res.send('create a todo item')
-//   })
+
 
 //access an individual item
 router.get('/:id', (_req: Request, res: Response) => {
