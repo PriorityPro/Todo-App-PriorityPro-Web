@@ -3,11 +3,17 @@
 // to understand information, he's a psycho information broker after all
 // ofc we will use ES module system 
 import express, { Request, Response } from "express";
-import itemRouter from './routes/items.ts';
+import itemRouter from './routes/itemsRoutes.ts';
 
 // instantize an app from express() function
 const app = express();
 
+//middleware for static files in the future if we end up going this route
+//app.use(express.static('public'));
+
+//middleware to allow information from forms as we'll need this for our todo list
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // setup a simple get route 
 // and return a test message
 app.get("/", (_req: Request, res: Response) => {
