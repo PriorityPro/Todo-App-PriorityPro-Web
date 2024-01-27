@@ -1,14 +1,15 @@
 // import { Pool, QueryResult } from "pg";
 import pkg, { QueryResult } from 'pg'
+import dotenv from 'dotenv';
+dotenv.config();
+
 const { Pool } = pkg;
 
-const PG_URI = 'postgres://thdnzpea:l5qYwcKa98pld1Shfs1PUYpsIqNO-p7G@heffalump.db.elephantsql.com/thdnzpea';
+const connectionString = process.env.PG_URI || '';
 
-const pool = new Pool({
-  connectionString: PG_URI
-});
+const pool = new Pool({ connectionString });
 
-export { pool, PG_URI };
+export { pool };
 
 export const query = (
   text: string,
