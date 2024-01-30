@@ -23,19 +23,23 @@ res.status(200).json(res.locals.item)
 //access an individual item
 router.get('/:id', (_req: Request, res: Response) => {
 _req.params.id
-res.send(`get an individual item ${_req.params.id}`)
+res.status(200).json(res.locals.fetchedItems)
 })
 
 //update an individual item
-router.put('/:id', (_req: Request, res: Response) => {
-  _req.params.id
-  res.send(`update an individual item ${_req.params.id}`)
+router.patch('/:id', itemController.updateItem, (req: Request, res: Response) => {
+  console.log('test')
+  console.log(res.locals)
+  req.params.id
+  res.status(200).json(res.locals.fetchedItems);
+  
 })
 
 //Delete an individual item
 router.delete('/:id', itemController.deleteItem, (req: Request, res: Response) => {
   req.params.id
-  res.send(`delete an individual item ${req.params.id}`)
+  // res.send(`delete an individual item ${req.params.id}`)
+  res.status(200).json(res.locals.fetchedItems)
 })
 
 router.param('id', (_req: Request, _res: Response, next, id) => {
