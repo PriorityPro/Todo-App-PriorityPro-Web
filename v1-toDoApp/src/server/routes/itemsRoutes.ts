@@ -33,9 +33,9 @@ router.put('/:id', (_req: Request, res: Response) => {
 })
 
 //Delete an individual item
-router.delete('/:id', (_req: Request, res: Response) => {
-  _req.params.id
-  res.send(`delete an individual item ${_req.params.id}`)
+router.delete('/:id', itemController.deleteItem, (req: Request, res: Response) => {
+  req.params.id
+  res.send(`delete an individual item ${req.params.id}`)
 })
 
 router.param('id', (_req: Request, _res: Response, next, id) => {
