@@ -20,7 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/client/components/FetchItems.tsx"],
   "ts-node": {
     "esm": true,
     "compiler": "typescript"
