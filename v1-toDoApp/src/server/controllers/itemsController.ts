@@ -29,7 +29,7 @@ try {
   const result = await query(sqlCommandCheck, valueCheck);
   if (result.rows[0]) {
     res.status(400).json({ message: 'Item already exist' });
-    return next()
+    return;
   }
 
   const primarySqlCmd = `INSERT INTO toDoItems (title, completed) VALUES ($1, $2) RETURNING *;`;
@@ -37,7 +37,7 @@ try {
   await query(primarySqlCmd, values);
 
   res.status(201).json({ message: 'item created successfully' });
-  next()
+
 
 } catch (err) {
   console.error('Error during item insert option:', err);
