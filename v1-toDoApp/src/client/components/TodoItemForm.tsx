@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import api from '../api/ItemCreator.ts';
 import styled from 'styled-components';
 
+
 const ListWrapper = styled.section`
   background: white;
   color: black;
@@ -67,28 +68,20 @@ const TodoItemForm = () => {
 
   return (
     <>
-    <h2>Todo</h2>
+    <h2 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl text-yellow-300">Todo</h2>
     <form onSubmit={handleSubmit}>
       <div id="form">
-        <label htmlFor="title">What needs to be done?</label>
+        <label className='' htmlFor="title">What needs to be done?</label>
         <br />
-        <input type="text" id="title" placeholder="" value={title} onChange={handleChange} required />
-        {/* <span className="error"></span> */}
-      </div>
-      <div>
-        {/* <label htmlFor="completed">Completed:</label> */}
-        <br />
-        {/* <input type="checkbox" id="completed" checked={complete} onChange={handleChange} /> */}
-      </div>
-      {/* <input type="submit" value="Submit" /> */}
-
-      <div>
-        {/* <h2>Todo List:</h2> */}
-        <ul>
-          {todos.map((todo, index) => (
-            <ListWrapper key={index}>{todo.title} - {todo.complete ? 'Completed' : 'Incomplete'}</ListWrapper>
-          ))}
-        </ul>
+        <input className='rounded-md mb-6' type="text" id="title" placeholder="" value={title} onChange={handleChange} required />
+    
+        <div className='h-full bg-stone-500 bg-opacity-25 rounded-md'>
+          <ul>
+            {todos.map((todo, index) => (
+              <ol className='p-0.5' key={index}>{todo.title} - {todo.complete ? 'Completed' : 'Incomplete'}</ol>
+            ))}
+          </ul>
+        </div>
       </div>
     </form>
     </>
