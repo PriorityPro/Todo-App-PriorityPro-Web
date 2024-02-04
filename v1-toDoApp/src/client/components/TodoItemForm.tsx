@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
 import api from '../api/ItemCreator.ts';
+import styled from 'styled-components';
+
+const ListWrapper = styled.section`
+  background: white;
+  color: black;
+  height: auto;
+
+`;
+
+
 
 interface Todo {
   title: string,
@@ -56,29 +66,32 @@ const TodoItemForm = () => {
   };
 
   return (
+    <>
+    <h2>Todo</h2>
     <form onSubmit={handleSubmit}>
       <div id="form">
-        <label htmlFor="title">Todo item:</label>
+        <label htmlFor="title">What needs to be done?</label>
         <br />
         <input type="text" id="title" placeholder="" value={title} onChange={handleChange} required />
-        <span className="error">Enter a todo item</span>
+        {/* <span className="error"></span> */}
       </div>
       <div>
-        <label htmlFor="completed">Completed:</label>
+        {/* <label htmlFor="completed">Completed:</label> */}
         <br />
-        <input type="checkbox" id="completed" checked={complete} onChange={handleChange} />
+        {/* <input type="checkbox" id="completed" checked={complete} onChange={handleChange} /> */}
       </div>
-      <input type="submit" value="Submit" />
+      {/* <input type="submit" value="Submit" /> */}
 
       <div>
-        <h2>Todo List:</h2>
+        {/* <h2>Todo List:</h2> */}
         <ul>
           {todos.map((todo, index) => (
-            <li key={index}>{todo.title} - {todo.complete ? 'Completed' : 'Incomplete'}</li>
+            <ListWrapper key={index}>{todo.title} - {todo.complete ? 'Completed' : 'Incomplete'}</ListWrapper>
           ))}
         </ul>
       </div>
     </form>
+    </>
   );
 };
 
