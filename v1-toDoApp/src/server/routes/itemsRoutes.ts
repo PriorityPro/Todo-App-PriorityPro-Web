@@ -27,8 +27,8 @@ res.send(`get an individual item ${_req.params.id}`)
 })
 
 //update an individual item
-router.put('/:id', (_req: Request, res: Response) => {
-  _req.params.id
+router.patch('/:id', itemController.updateItem, (_req: Request, res: Response) => {
+  res.status(200).json(res.locals.updatedItem);
   res.send(`update an individual item ${_req.params.id}`)
 })
 

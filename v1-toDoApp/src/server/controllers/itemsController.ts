@@ -7,6 +7,7 @@ import { Request, Response, NextFunction } from "express";
 interface itemsControllerInterface {
   createItem: (req: Request, res: Response, next: NextFunction) => Promise<void>,
   fetchItems: (req: Request, res: Response, next: NextFunction) => Promise<void>,
+  updateItem: (_req: Request, res:Response, next: NextFunction) => Promise<void>,
 }
 
 const itemController : itemsControllerInterface = {
@@ -64,6 +65,21 @@ try {
       return next(createHttpError(400, 'Could not retreive your todo list request'))
     }
 
+
+   },
+   updateItem: async (req: Request, res:Response, next: NextFunction) => {
+    const { title, completed } = req.body;
+    const { id } = req.params;
+    const command = `UPDATE toDoItems SET title = $1, completed = $2 WHERE id = $3;`;
+    const values = [title, completed, id];
+
+    try {
+      const updatedItem = await query(command, values);
+      res.locals.updateItem = updatedItem;
+      return next();
+    } catch (err) {
+      return next(createHttpError(400, 'Could not update item in itemsController.updateItem'));
+    }
 
    }
 }
