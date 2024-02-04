@@ -15,7 +15,7 @@ router.get("/", itemController.fetchItems, (_req: Request, res: Response) => {
 //post to create our items for a todo list
 router.post('/create', itemController.createItem, (_req: Request, res: Response) => {
 //res.status(200).send('test creating an item');
-res.status(200).json(res.locals.item)
+res.status(201).json(res.locals.newItem)
 })
 
 

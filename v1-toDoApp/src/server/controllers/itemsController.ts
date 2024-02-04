@@ -12,11 +12,11 @@ interface itemsControllerInterface {
 const itemController : itemsControllerInterface = {
   createItem: async (req, res, next) => {
     
-    const { title, completed } = req.body;
+    const { title, completed } = req.body || {};
     console.log('this is our req.body --->', req.body)
     
     //make sure the title and a completed status are set
-    if (!title || !completed ) {
+    if (!title ) {
       //if not return this error
       res.status(400).send('Error in itemController.createItem: Not given all necessary inputs')
       //continues the middleware chain
@@ -24,25 +24,27 @@ const itemController : itemsControllerInterface = {
     }
 
 try {
-  const sqlCommandCheck = `SELECT * from toDoItems WHERE title = $1;`;
-  const valueCheck = [ title ];
+  const sqlCommandCheck = `SELECT * from toDoItems WHERE title = $1 AND completed = $2;`;
+  const valueCheck = [ title, completed ];
   const result = await query(sqlCommandCheck, valueCheck);
   if (result.rows[0]) {
     res.status(400).json({ message: 'Item already exist' });
-    return next()
+    return;
   }
 
-  const primarySqlCmd = `INSERT INTO toDoItems (title, completed) VALUES ($1, $2) RETURNING *;`;
-  const values = [title, completed];
-  await query(primarySqlCmd, values);
-
-  res.status(201).json({ message: 'item created successfully' });
-  next()
-
+  //const primarySqlCmd = `INSERT INTO toDoItems (title, completed) VALUES ($1, $2) RETURNING *;`;
+  const primarySqlCmd = `INSERT INTO toDoItems (title) VALUES ($1) RETURNING *;`;
+  //INSERT INTO toDoItems (title)
+//VALUES ('walk the dog') RETURNING *;
+  const values = [title];
+  console.log('this is our values', values)
+  const newItem = await query(primarySqlCmd, values);
+  res.locals.newItem = newItem.rows[0];
+  return next()
+  // res.status(201).json({ message: 'item created successfully' });
 } catch (err) {
-  console.error('Error during item insert option:', err);
-  res.status(500).send('Error creating a new item to database')
-  next()
+  return next(createHttpError(400, 'Could not create new item in itemsController.createItem'))
+
       }
    },
 
