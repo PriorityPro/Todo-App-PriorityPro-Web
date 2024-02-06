@@ -1,18 +1,10 @@
 import React, { useState } from 'react'
 import api from '../api/ItemCreator.ts';
-import styled from 'styled-components';
-
-
-const ListWrapper = styled.section`
-  background: white;
-  color: black;
-  height: auto;
-
-`;
 
 
 
-interface Todo {
+interface Todo  {
+  id: number;
   title: string,
   complete: boolean
 }
@@ -43,15 +35,36 @@ const TodoItemForm = () => {
       title: title,
       completed: complete,
     };
-    
+
     try {
       const response = await api.post('http://localhost:5008/api/v1/items/create', requestBody);
-      console.log('API response', response);
+      
+      const newItem = response.data
+      console.log('API response data', response.data);
+      setTodos([...todos, newItem]);
     } catch (error) {
       console.error('Could not add new item to the list', error.response.data);
     }
-    setTodos([...todos, { title, complete }]);
+    // setTodos([...todos, { title, complete, id }]);
+    setTitle('');
+    setComplete(false);
   };
+
+
+const deleteItemFromList = async (id: number) => {
+  
+
+  try {
+    const response = await api.delete(`http://localhost:5008/api/v1/items/${id}`, )
+    console.log("API Response for delete", response);
+    setTodos(todos.filter(item => item.id !== id));
+  } catch (error) {
+    console.log('could not delete th item from the list');
+    error.response.data
+  }
+  
+
+}
   
  
 //on form submission we don't want to reload the page
@@ -65,6 +78,7 @@ const TodoItemForm = () => {
     setTitle('')
     setComplete(false);
   };
+  
 
   return (
     <>
@@ -74,20 +88,23 @@ const TodoItemForm = () => {
         <label className='' htmlFor="title">What needs to be done?</label>
         <br />
         <input className='rounded-md mb-6' type="text" id="title" placeholder="" value={title} onChange={handleChange} required />
-    
-        <div className='h-full bg-stone-500 bg-opacity-25 rounded-md'>
-          <ul>
+        <div className='flex items-center justify-center p-4'>
+          <ul className='h-full bg-stone-500 bg-opacity-25 rounded-md'>
             {todos.map((todo, index) => (
-              <ol className='p-0.5' key={index}>{todo.title} - {todo.complete ? 'Completed' : 'Incomplete'}</ol>
+              <ol className='p-2 flex items-center' key={index}>
+                <span className="mr-2">{todo.title}</span>
+                <button className="ml-auto w-5 h-5 bg-yellow-500 hover:bg-red-400 text-white" onClick={() => {deleteItemFromList(todo.id)}}>
+                  X
+                </button>
+              </ol>
             ))}
           </ul>
         </div>
       </div>
     </form>
-    </>
+  </>
   );
 };
 
 export default TodoItemForm;
-
 

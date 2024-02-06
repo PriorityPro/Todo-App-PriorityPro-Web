@@ -33,8 +33,9 @@ router.patch('/:id', itemController.updateItem, (_req: Request, res: Response) =
 })
 
 //Delete an individual item
-router.delete('/:id', (_req: Request, res: Response) => {
-  _req.params.id
+router.delete('/:id', itemController.deleteItem, (_req: Request, res: Response) => {
+  
+  res.status(200).json(res.locals.fetchedItems);
   res.send(`delete an individual item ${_req.params.id}`)
 })
 

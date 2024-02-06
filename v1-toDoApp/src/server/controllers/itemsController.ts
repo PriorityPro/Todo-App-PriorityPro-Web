@@ -8,6 +8,7 @@ interface itemsControllerInterface {
   createItem: (req: Request, res: Response, next: NextFunction) => Promise<void>,
   fetchItems: (req: Request, res: Response, next: NextFunction) => Promise<void>,
   updateItem: (_req: Request, res:Response, next: NextFunction) => Promise<void>,
+  deleteItem: (_req: Request, res:Response, next: NextFunction) => Promise<void>,
 }
 
 const itemController : itemsControllerInterface = {
@@ -79,6 +80,20 @@ try {
       return next();
     } catch (err) {
       return next(createHttpError(400, 'Could not update item in itemsController.updateItem'));
+    }
+   },
+
+   deleteItem: async (req: Request, res:Response, next: NextFunction) => {
+    const { id } = req.params;
+    const command = `DELETE FROM toDoItems WHERE id = $1;`;
+    const values = [id];
+
+    try {
+      const deletedItem = await query(command, values);
+      res.locals.deletedItem = deletedItem.rows;
+      return next();
+    } catch (err) {
+      return next(createHttpError(400, 'Could not delete item from itemController.deleteItem'))
     }
 
    }
