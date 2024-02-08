@@ -66,12 +66,7 @@ const deleteItemFromList = async (id: number) => {
 
 }
   
- 
-//on form submission we don't want to reload the page
-//invoking our addItemToDatabase function which is making the request
-//as well as adding our items to our array
-//updating the state for the title to an empty string
-//updating the state to false
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     addItemToDatabase();
