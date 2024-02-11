@@ -14,8 +14,8 @@ router.get("/", itemController.fetchItems, (_req: Request, res: Response) => {
 
 //post to create our items for a todo list
 router.post('/create', itemController.createItem, (_req: Request, res: Response) => {
-//res.status(200).send('test creating an item');
 res.status(201).json(res.locals.newItem)
+console.log('New item created', res.locals.newItem)
 })
 
 
@@ -29,14 +29,13 @@ res.send(`get an individual item ${_req.params.id}`)
 //update an individual item
 router.patch('/:id', itemController.updateItem, (_req: Request, res: Response) => {
   res.status(200).json(res.locals.updatedItem);
-  res.send(`update an individual item ${_req.params.id}`)
+  console.log(`update an individual item ${_req.params.id}`);
 })
 
 //Delete an individual item
 router.delete('/:id', itemController.deleteItem, (_req: Request, res: Response) => {
-  
-  res.status(200).json(res.locals.fetchedItems);
   res.send(`delete an individual item ${_req.params.id}`)
+  console.log(res.locals.fetchedItems)
 })
 
 router.param('id', (_req: Request, _res: Response, next, id) => {

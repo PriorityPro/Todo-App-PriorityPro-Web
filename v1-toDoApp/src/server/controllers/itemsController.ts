@@ -26,6 +26,8 @@ const itemController : itemsControllerInterface = {
     }
 
 try {
+  
+  //Look into adding a constrait for our sql command for items
   const sqlCommandCheck = `SELECT * from toDoItems WHERE title = $1 AND completed = $2;`;
   const valueCheck = [ title, completed ];
   const result = await query(sqlCommandCheck, valueCheck);
