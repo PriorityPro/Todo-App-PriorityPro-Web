@@ -56,7 +56,9 @@ try {
    //res.locals.items
    fetchItems: async (_req: Request, res: Response, next: NextFunction) => {
     //const { title, completed } = req.body;
-    const sqlCommand = `SELECT * FROM toDoItems;`;
+    // const sqlCommand = `SELECT * FROM toDoItems;`;
+    //new command using our sorted list.
+    const sqlCommand = `SELECT * FROM sortedToDoList;`
     try {
       const allItems = await query(sqlCommand);
       res.locals.fetchedItems = allItems.rows;

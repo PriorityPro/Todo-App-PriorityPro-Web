@@ -16,7 +16,12 @@ const TodoItemForm = () => {
   const [complete, setComplete] = useState(false);
   const [todos, setTodos] = useState<Todo[]>([]); // Explicitly define the type
   const [isEditing, setIsEditing] = useState<number | null>(null); // Track the ID of the item being edited
-  const [selectedItem, setSelectedItem] = useState<Todo | null>(null);
+
+
+  // const visibleTodos = useMemo(
+  //   () => todo(todos, index),
+  //   [todos, index]
+  // );
 
 
 
@@ -129,11 +134,11 @@ return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mb-1 bg-emerald-400 rounded-md cursor-pointer ml-2 h-8 w-20 inline-flex items-center justify-center w-8 h-8" onClick={addItemToDatabase}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
-        <div className='flex items-center justify-center p-4'>
+        <div className='flex items-center justify-center p-2'>
           <ul className='shadow-lg dark:shadow-dark h-full bg-stone-500 bg-opacity-25 rounded-md'>
-          /* Look into using memo here rather then inserting the logic in our return */
+          {/* Look into using memo here rather then inserting the logic in our return */}
             {todos.map((todo, index) => (
-              <li className='p-2 flex items-center' key={index}>
+              <li className='mx-2 flex items-center' key={index}>
                 {isEditing === todo.id ? (
                   <input
                     type="text"
