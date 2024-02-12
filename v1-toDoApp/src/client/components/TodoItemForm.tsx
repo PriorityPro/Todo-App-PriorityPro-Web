@@ -3,7 +3,6 @@ import api from '../api/ItemCreator.ts';
 
 
 
-
 interface Todo  {
   id: number;
   title: string,
@@ -131,7 +130,7 @@ return (
         </svg>
         <div className='flex items-center justify-center p-4'>
           <ul className='shadow-lg dark:shadow-dark h-full bg-stone-500 bg-opacity-25 rounded-md'>
-          /* Look into using memo here rather then inserting the logic in our return */
+          {/* Look into using memo here rather then inserting the logic in our return */}
             {todos.map((todo, index) => (
               <li className='p-2 flex items-center' key={index}>
                 {isEditing === todo.id ? (
