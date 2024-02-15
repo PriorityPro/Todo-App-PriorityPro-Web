@@ -1,23 +1,32 @@
-import React, { useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import api from '../api/ItemCreator.ts';
+// import FetchItem from './FetchItems.tsx';
 
 
 
-interface Todo  {
-  id: number;
+interface TodoProps  {
+  id: number,
   title: string,
   complete: boolean
 }
 
 
-const TodoItemForm = () => {
-  const [title, setTitle] = useState('');
-  const [complete, setComplete] = useState(false);
-  const [todos, setTodos] = useState<Todo[]>([]); // Explicitly define the type
+//This allows us to pass our Todos to other components
+const TodoItemForm: React.FC = (): JSX.Element => {
+  const [taskName, setTaskName] = useState('');
+  const [isComplete, setisComplete] = useState(false);
+  const [todos, setTodos] = useState<TodoProps[]>([]); // Explicitly define the type
   const [isEditing, setIsEditing] = useState<number | null>(null); // Track the ID of the item being edited
-  const [selectedItem, setSelectedItem] = useState<Todo | null>(null);
+  const [selectedItem, setSelectedItem] = useState<TodoProps | null>(null);
 
 
+  //const renderedTodos = useMemo(() => { return todos.map(x => <TodoItem props={...x} />)}, [todos])
+//const visibleTodos = useMemo(() => filterTodos(todos), [todos]); 
+
+// const renderNewTodo = useMemo(
+//   () => FetchItem(Todo),
+//   [Todo]
+// );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, id?: number) => {
     const { value } = event.target;
@@ -29,7 +38,7 @@ const TodoItemForm = () => {
       setTodos(updatedTodos);
     } else {
       // Add a new todo item
-      setTitle(value);
+      setTaskName(value);
     }
   }; 
 
@@ -37,15 +46,15 @@ const TodoItemForm = () => {
   const addItemToDatabase = async () => {
 
   
-    if (!title) {
+    if (!taskName) {
       //bug to look into later but current cheapest work around is the following
       //this logic is here to prevent our middleware to trigger a post request
       return;
     }
 
     const requestBody = {
-      title: title,
-      completed: complete,
+      title: taskName,
+      completed: isComplete,
     };
 
     try {
@@ -59,8 +68,8 @@ const TodoItemForm = () => {
     } catch (error) {
       console.error('Could not add new item to the list', error.response.data);
     }
-    setTitle('');
-    setComplete(false);
+    setTaskName('');
+    setisComplete(false);
   };
 
 
@@ -95,12 +104,11 @@ const updateTodo = async (id: number, newTitle: string) => {
 const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     addItemToDatabase();
-    setTitle('')
-    setComplete(false);
+    setTaskName('')
+    setisComplete(false);
 };
 
-//const renderedTodos = useMemo(() => { return todos.map(x => <TodoItem props={...x} />)}, [todos])
-  
+
 
 return (
   <>
@@ -114,7 +122,7 @@ return (
           className='mt-2 h-8 w-80 rounded-md mb-7'  
           id="title" 
           placeholder="" 
-          value={title} 
+          value={taskName} 
           onChange={handleChange}  
           onBlur={e => {
             // only re-focus if the user clicked on something
