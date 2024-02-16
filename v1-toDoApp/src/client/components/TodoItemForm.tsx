@@ -64,7 +64,7 @@ const deleteItemFromList = async (id: number) => {
     console.log("API Response for delete", response);
     setTodos(todos.filter(item => item.id !== id));
   } catch (error) {
-    console.log('could not delete th item from the list');
+    console.log('Could not delete th item from the list.');
     error.response.data
   }
 }
