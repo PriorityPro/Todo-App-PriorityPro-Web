@@ -14,7 +14,7 @@ interface itemsControllerInterface {
 const itemController : itemsControllerInterface = {
   createItem: async (req, res, next) => {
     
-    const { title, completed } = req.body || {};
+    const { title } = req.body || {};
     console.log('this is our req.body --->', req.body)
     
     //make sure the title and a completed status are set
@@ -28,13 +28,14 @@ const itemController : itemsControllerInterface = {
 try {
   
   //Look into adding a constrait for our sql command for items
-  const sqlCommandCheck = `SELECT * from toDoItems WHERE title = $1 AND completed = $2;`;
-  const valueCheck = [ title, completed ];
-  const result = await query(sqlCommandCheck, valueCheck);
-  if (result.rows[0]) {
-    res.status(400).json({ message: 'Item already exist' });
-    return;
-  }
+  // const sqlCommandCheck = `SELECT * from toDoItems WHERE title = $1 AND completed = $2;`;
+  // const valueCheck = [ title, completed ];
+  // const result = await query(sqlCommandCheck, valueCheck);
+  // if (result.rows[0]) {
+  //   res.status(400).json({ message: 'Item already exist' });
+  //   return;
+  // }
+ 
 
   //const primarySqlCmd = `INSERT INTO toDoItems (title, completed) VALUES ($1, $2) RETURNING *;`;
   const primarySqlCmd = `INSERT INTO toDoItems (title) VALUES ($1) RETURNING *;`;
