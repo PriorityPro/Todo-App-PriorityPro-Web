@@ -14,7 +14,8 @@ describe('Creating a todo', () => {
     cy.get('li').click().type('drinking some coffee')
     cy.get('li').click()
 
-
+    //deleting a todo 
+    cy.get('[id^=trash]').click({ multiple: true })
 
   })
 })
