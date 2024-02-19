@@ -94,7 +94,7 @@ const handleSubmit = (event: React.FormEvent) => {
 };
 
 return (
-  <div>
+  <div className='static  flex flex-col items-center justify-center'>
     <h2 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl text-yellow-300">Todo</h2>
     <form onSubmit={handleSubmit}>
       <div id="form">
@@ -113,12 +113,12 @@ return (
             }
           }}
         />
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mb-1 bg-emerald-400 rounded-md cursor-pointer ml-2 h-8 w-20 inline-flex items-center justify-center w-8 h-8" onClick={addItemToDatabase}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mb-1 bg-emerald-600 hover:bg-emerald-400 rounded-md cursor-pointer ml-2 h-8 w-20 inline-flex items-center justify-center w-8 h-8" onClick={addItemToDatabase}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
       </div>
     </form>
-    <ul className="'shadow-lg dark:shadow-dark h-full bg-stone-500 bg-opacity-25 rounded-md'">
+    <ul className="'shadow-lg dark:shadow-dark h-full bg-stone-500 bg-opacity-25 rounded-lg'">
       {todos.map((todo, index) => (
         <TodoItem
           key={index}
