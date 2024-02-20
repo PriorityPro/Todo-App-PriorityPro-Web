@@ -22,10 +22,16 @@ npm install
 
 ```
 
+## Todo App
+- Implementation of the Todo app is fully implemented as we have full CRUD functionality and are currently working on some minor bugs and styling.
+
 ## Roadmap
-PriorityPro is still in the very early stages of development. 
+- Design and development of the calendar integration using Google's API is in the early stages of developement
+- Next up will be authentication and OAuth
 
 
-# Product v1.0.0.1
-<img width="1000" alt="Screen Shot 2024-02-04 at 2 12 42 PM" src="https://github.com/PriorityPro/Todo-App-PriorityPro-Web/assets/90209258/6ee87499-9c76-4b48-9bce-97f756f6b4af">
+
+# Product v1.0.0.13
+<img width="1644" alt="Screen Shot 2024-02-19 at 8 56 24 PM" src="https://github.com/PriorityPro/Todo-App-PriorityPro-Web/assets/90209258/5ca0f6cd-981a-4bca-ab37-ac8443641092">
+
 
