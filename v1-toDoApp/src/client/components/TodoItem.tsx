@@ -12,7 +12,7 @@ interface TodoItemProps {
 
 const TodoItem: FC<TodoItemProps> = ({ todo, isEditing, setIsEditing, handleChange, updateTodo, deleteItemFromList }) => {
   return (
-    <li className='p-2 flex items-center'>
+    <li className='rounded-md p-2 flex items-center'>
       {isEditing ? (
         <input 
           type="text"

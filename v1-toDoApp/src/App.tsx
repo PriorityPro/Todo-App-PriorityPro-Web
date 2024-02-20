@@ -1,6 +1,7 @@
 
 import './App.css'
 import React from 'react';
+import Navbar from './client/components/Navbar.tsx';
 import TodoItemForm from './client/components/TodoItemForm.tsx';
 
 
@@ -8,8 +9,11 @@ import TodoItemForm from './client/components/TodoItemForm.tsx';
 function App() {
   return (
     <>
-    <TodoItemForm  />
+    <Navbar />
+    <TodoItemForm />
+
     </>
+
   )
 }
 
