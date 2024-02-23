@@ -16,6 +16,7 @@
     "@babel/eslint-parser": "^7.23.10",
     "@babel/plugin-proposal-decorators": "^7.23.9",
     "@heroicons/react": "^2.1.1",
+    "@react-spring/web": "^9.7.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express-router": "^0.0.1",
