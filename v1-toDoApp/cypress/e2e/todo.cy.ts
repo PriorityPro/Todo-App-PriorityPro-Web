@@ -7,15 +7,15 @@ describe('Creating a todo', () => {
 
     // Get an input, type into it
     cy.get('input').type('Walking the dog')
-    cy.get('svg').click()
+    cy.get('[id^=add]').click()
 
     //Creating a new todo and editing a todo
-    cy.get('[id^=edit]').click({ multiple: true })
-    cy.get('li').click().type('drinking some coffee')
-    cy.get('li').click()
+    cy.get('[id^=edit]').click()
+    cy.get('[id^=todo]').click().type('drinking some coffee')
+    //cy.get('li').click()
 
     //deleting a todo 
-    cy.get('[id^=trash]').click({ multiple: true })
+    cy.get('[id^=trash]').click()
 
   })
 })

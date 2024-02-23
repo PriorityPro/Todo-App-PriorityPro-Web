@@ -118,7 +118,7 @@ return (
             }
           }}
         />
-        <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mb-1 bg-emerald-600 hover:bg-emerald-400 rounded-md cursor-pointer ml-2 h-8 w-20 inline-flex items-center justify-center w-8 h-8" 
+        <svg id={'add'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mb-1 bg-emerald-600 hover:bg-emerald-400 rounded-md cursor-pointer ml-2 h-8 w-20 inline-flex items-center justify-center w-8 h-8" 
           onClick={() => {
             addItemToDatabase();
           }}>
@@ -127,7 +127,7 @@ return (
       </div>
     </form>
     
-    <ul className="w-full shadow-lg dark:shadow-dark h-full bg-stone-500 bg-opacity-25 rounded-lg"
+    <ul className="mr-10 w-full shadow-xl dark:shadow-dark h-full bg-stone-500 bg-opacity-25 rounded-lg"
     
     >
       {todos.map((todo, index) => (
