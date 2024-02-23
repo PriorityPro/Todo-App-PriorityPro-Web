@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useSpring, animated } from '@react-spring/web'
 import { TodoProps } from './TodoItemForm';
 
 interface TodoItemProps {
@@ -11,21 +12,40 @@ interface TodoItemProps {
 }
 
 const TodoItem: FC<TodoItemProps> = ({ todo, isEditing, setIsEditing, handleChange, updateTodo, deleteItemFromList }) => {
+
+  const springs = useSpring({
+    from: { x: -19 },
+    to: { x: 90 },
+  })
+ 
+
+
   return (
-    <li className='rounded-md p-2 flex items-center'>
+ 
+
+<animated.div
+style={{
+  ...springs,
+}}
+>
+
+
+    <li id={'todo'}className='rounded-md p-2 flex items-center'>
       {isEditing ? (
         <input 
-          type="text"
-          value={todo.title}
-          onChange={(e) => handleChange(e, todo.id)}
-          onBlur={() => updateTodo(todo.id, todo.title)}
+        type="text"
+        value={todo.title}
+        onChange={(e) => handleChange(e, todo.id)}
+        onBlur={() => updateTodo(todo.id, todo.title)}
         />
-      ) : (
-        <span  className="w-full mr-2 relative flex justify-between">{todo.title}</span>
-      )}
-      <div className='inline-flex group '>
+        ) : (
+          <span  className="w-full mr-2 relative flex justify-between"
+          
+          >{todo.title}</span>
+          )}
+      <div className='inline-flex group'>
         {/* Edit icon */}
-        <svg id={'edit'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" onClick={() => setIsEditing(todo.id)} className="bg-blue-500 cursor-pointer w-8 h-8 p-1 m-1 rounded-md shadow-lg dark:shadow-dark">
+        <svg id={'edit'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" onClick={() => setIsEditing(todo.id)} className="ml-10  bg-blue-500 cursor-pointer w-8 h-8 p-1 m-1 rounded-md shadow-lg dark:shadow-dark">
           <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
         </svg>
         {/* Trash can icon */}
@@ -34,6 +54,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo, isEditing, setIsEditing, handleChan
         </svg>
       </div>
     </li>
+    </animated.div>
   );
 };
 
